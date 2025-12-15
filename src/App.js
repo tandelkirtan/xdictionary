@@ -48,7 +48,6 @@ function App() {
         <button onClick={handleSearch}>Search</button>
       </div>
 
-      {/* Always show Definition section */}
       <div className="result-container">
         <h3>Definition:</h3>
         {result ? (
@@ -56,7 +55,7 @@ function App() {
             {result}
           </p>
         ) : (
-          <p></p>  {/* Empty paragraph for initial state */}
+          <p></p>
         )}
       </div>
     </div>
