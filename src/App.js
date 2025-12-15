@@ -9,11 +9,13 @@ function App() {
   ];
 
   const [searchTerm, setSearchTerm] = useState('');
-  const [result, setResult] = useState('');
+  const [foundMeaning, setFoundMeaning] = useState('');
+  const [wordNotFound, setWordNotFound] = useState(false);
 
   const handleSearch = () => {
     if (!searchTerm.trim()) {
-      setResult('');
+      setFoundMeaning('');
+      setWordNotFound(false);
       return;
     }
     
@@ -22,9 +24,11 @@ function App() {
     );
 
     if (foundWord) {
-      setResult(foundWord.meaning);
+      setFoundMeaning(foundWord.meaning);
+      setWordNotFound(false);
     } else {
-      setResult('Word not found in the dictionary.');
+      setFoundMeaning('');
+      setWordNotFound(true);
     }
   };
 
@@ -50,10 +54,10 @@ function App() {
 
       <div className="result-container">
         <h3>Definition:</h3>
-        {result ? (
-          <p className={result === 'Word not found in the dictionary.' ? 'not-found' : ''}>
-            {result}
-          </p>
+        {foundMeaning ? (
+          <p>{foundMeaning}</p>
+        ) : wordNotFound ? (
+          <p>Word not found in the dictionary.</p>
         ) : (
           <p></p>
         )}
