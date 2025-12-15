@@ -9,21 +9,28 @@ function App() {
   ];
 
   const [searchTerm, setSearchTerm] = useState('');
-  const [result, setResult] = useState(null);
+  const [definition, setDefinition] = useState('');
 
   const handleSearch = () => {
     if (!searchTerm.trim()) {
-      setResult(null);
+      setDefinition('');
       return;
     }
+    
     const foundWord = data.find(item => 
       item.word.toLowerCase() === searchTerm.toLowerCase().trim()
     );
 
     if (foundWord) {
-      setResult(foundWord.meaning);
+      setDefinition(foundWord.meaning);
     } else {
-      setResult("Word not found in the dictionary.");
+      setDefinition('Word not found in the dictionary.');
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
     }
   };
 
@@ -35,20 +42,21 @@ function App() {
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
+          onKeyPress={handleKeyPress}
           placeholder="Enter search term..."
         />
         <button onClick={handleSearch}>Search</button>
       </div>
 
-      {result && (
+      {definition && (
         <div className="result-container">
-          {result === "Word not found in the dictionary." ? (
-            <p className="not-found">{result}</p>
+          {definition === 'Word not found in the dictionary.' ? (
+            <p className="not-found">{definition}</p>
           ) : (
-            <>
+            <div>
               <h3>Definition:</h3>
-              <p>{result}</p>
-            </>
+              <p>{definition}</p>
+            </div>
           )}
         </div>
       )}
