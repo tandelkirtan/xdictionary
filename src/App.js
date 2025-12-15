@@ -48,16 +48,15 @@ function App() {
         <button onClick={handleSearch}>Search</button>
       </div>
 
+      {/* Always show Definition section */}
       <div className="result-container">
         <h3>Definition:</h3>
         {result ? (
-          result === 'Word not found in the dictionary.' ? (
-            <p className="not-found">{result}</p>
-          ) : (
-            <p>{result}</p>
-          )
+          <p className={result === 'Word not found in the dictionary.' ? 'not-found' : ''}>
+            {result}
+          </p>
         ) : (
-          <p></p>
+          <p></p>  {/* Empty paragraph for initial state */}
         )}
       </div>
     </div>
