@@ -9,11 +9,11 @@ function App() {
   ];
 
   const [searchTerm, setSearchTerm] = useState('');
-  const [definition, setDefinition] = useState('');
+  const [result, setResult] = useState('');
 
   const handleSearch = () => {
     if (!searchTerm.trim()) {
-      setDefinition('');
+      setResult('');
       return;
     }
     
@@ -22,9 +22,9 @@ function App() {
     );
 
     if (foundWord) {
-      setDefinition(foundWord.meaning);
+      setResult(foundWord.meaning);
     } else {
-      setDefinition('Word not found in the dictionary.');
+      setResult('Word not found in the dictionary.');
     }
   };
 
@@ -48,18 +48,18 @@ function App() {
         <button onClick={handleSearch}>Search</button>
       </div>
 
-      {definition && (
-        <div className="result-container">
-          {definition === 'Word not found in the dictionary.' ? (
-            <p className="not-found">{definition}</p>
+      <div className="result-container">
+        <h3>Definition:</h3>
+        {result ? (
+          result === 'Word not found in the dictionary.' ? (
+            <p className="not-found">{result}</p>
           ) : (
-            <div>
-              <h3>Definition:</h3>
-              <p>{definition}</p>
-            </div>
-          )}
-        </div>
-      )}
+            <p>{result}</p>
+          )
+        ) : (
+          <p></p>
+        )}
+      </div>
     </div>
   );
 }
